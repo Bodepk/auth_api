@@ -1,21 +1,23 @@
 package com.bodev.auth_api.controller;
 
-
 import com.bodev.auth_api.dto.AuthRequest;
 import com.bodev.auth_api.dto.AuthResponse;
 import com.bodev.auth_api.dto.RegisterRequest;
 import com.bodev.auth_api.service.AuthService;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
-@RequiredArgsConstructor
 public class AuthController {
 
     private final AuthService authService;
+
+    //CONSTRUCTOR
+    public AuthController(AuthService authService) {
+        this.authService = authService;
+    }
 
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@Valid @RequestBody RegisterRequest request) {
@@ -29,7 +31,6 @@ public class AuthController {
 
     @PostMapping("/refresh")
     public ResponseEntity<AuthResponse> refresh(@RequestHeader("Authorization") String authHeader) {
-        // Extraer el refresh token del header
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             throw new RuntimeException("Refresh token no proporcionado");
         }
