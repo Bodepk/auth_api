@@ -44,7 +44,7 @@ public class User implements UserDetails {
         this.enabled = enabled;
     }
 
-    // ===== GETTERS Y SETTERS =====
+    //GETTERS Y SETTERS
     public Long getId() {
         return id;
     }
@@ -93,7 +93,7 @@ public class User implements UserDetails {
         this.enabled = enabled;
     }
 
-    // ===== MÉTODOS DE UserDetails =====
+    //MÉTODOS DE UserDetails
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_" + role.name()));
@@ -124,7 +124,7 @@ public class User implements UserDetails {
         return enabled;
     }
 
-    // ===== ENUM =====
+    //ENUM
     public enum Role {
         USER, ADMIN, GUEST
     }

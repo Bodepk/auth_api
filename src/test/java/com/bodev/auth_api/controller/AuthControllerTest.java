@@ -1,16 +1,15 @@
-package controller;
+package com.bodev.auth_api.controller;
 
 import com.bodev.auth_api.dto.AuthRequest;
 import com.bodev.auth_api.dto.RegisterRequest;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
-
+import tools.jackson.databind.json.JsonMapper;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -24,7 +23,7 @@ public class AuthControllerTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private ObjectMapper objectMapper;
+    private JsonMapper jsonMapper;
 
     @Test
     void shouldRegisterUser() throws Exception {
@@ -32,11 +31,11 @@ public class AuthControllerTest {
         request.setFullName("Test User");
         request.setEmail("test@email.com");
         request.setPassword("123456");
-        request.setRole("USER");
+
 
         mockMvc.perform(post("/api/auth/register")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(request)))
+                        .content(jsonMapper.writeValueAsString(request)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.email").value("test@email.com"))
                 .andExpect(jsonPath("$.role").value("USER"));
@@ -49,11 +48,11 @@ public class AuthControllerTest {
         registerRequest.setFullName("Login Test");
         registerRequest.setEmail("logintest@email.com");
         registerRequest.setPassword("123456");
-        registerRequest.setRole("USER");
+
 
         mockMvc.perform(post("/api/auth/register")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(registerRequest)));
+                .content(jsonMapper.writeValueAsString(registerRequest)));
 
         // Luego hacer login
         AuthRequest loginRequest = new AuthRequest();
@@ -62,7 +61,7 @@ public class AuthControllerTest {
 
         mockMvc.perform(post("/api/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(loginRequest)))
+                        .content(jsonMapper.writeValueAsString(loginRequest)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.token").exists())
                 .andExpect(jsonPath("$.refreshToken").exists());

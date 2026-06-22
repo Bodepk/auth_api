@@ -19,7 +19,7 @@ public class AuthResponse {
         this.fullName = fullName;
     }
 
-    // ===== GETTERS Y SETTERS =====
+    //GETTERS Y SETTERS
     public String getToken() {
         return token;
     }

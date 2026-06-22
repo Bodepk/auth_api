@@ -39,20 +39,15 @@ public class AuthService {
             throw new EmailAlreadyExistsException("El email " + request.getEmail() + " ya está registrado");
         }
 
-        User.Role role;
-        try {
-            role = User.Role.valueOf(request.getRole().toUpperCase());
-        } catch (Exception e) {
-            role = User.Role.USER;
-        }
 
         User user = new User(
                 request.getFullName(),
                 request.getEmail(),
                 passwordEncoder.encode(request.getPassword()),
-                role,
+                User.Role.USER, // siempre USER en registro público
                 true
         );
+
 
         userRepository.save(user);
 
