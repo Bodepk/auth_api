@@ -59,7 +59,7 @@ src/main/java/com/bodev/auth_api
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/your-username/auth_api.git
+git clone https://github.com/Bodepk/auth_api.git
 cd auth_api
 ```
 
@@ -169,11 +169,6 @@ The project includes integration tests that spin up the full Spring context with
 
 ## 👤 Author
 
-**Your Name**
-[GitHub](https://github.com/your-username) · [LinkedIn](https://linkedin.com/in/your-username) · youremail@email.com
+**José A. Herrera Aviles**
+[+5351161636](https://github.com/your-username)  · bode950929@gmail.com
 
----
-
-## 📄 License
-
-This project is licensed under the MIT License. See the `LICENSE` file for details.
