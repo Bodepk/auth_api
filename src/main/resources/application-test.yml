@@ -8,13 +8,27 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create-drop
-    show-sql: true
+    show-sql: false
     properties:
       hibernate:
         format_sql: true
         dialect: org.hibernate.dialect.H2Dialect
 
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      timeout: 6000ms
+
+  rate-limiter:
+    max-requests: 100
+    time-window: 60
+
 jwt:
   secret: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
   expiration: 86400000
   refresh-expiration: 604800000
+
+# Desactivar rate limiting en tests
+rate-limiter:
+  enabled: false

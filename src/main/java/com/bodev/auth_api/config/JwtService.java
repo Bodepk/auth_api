@@ -57,7 +57,9 @@ public class JwtService {
                 .signWith(getSignInKey())
                 .compact();
     }
-
+    public long getExpirationTime(String token) {
+        return extractClaim(token, Claims::getExpiration).getTime();
+    }
     public boolean isTokenValid(String token, UserDetails userDetails) {
         final String email = extractEmail(token);
         return (email.equals(userDetails.getUsername())) && !isTokenExpired(token);

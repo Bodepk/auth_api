@@ -18,33 +18,46 @@ repositories {
 }
 
 dependencies {
-    // ===== SPRING BOOT STARTERS =====
+    //SPRING BOOT STARTERS
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
-    // ===== LOMBOK =====
+    //LOMBOK
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
-    // ===== BASE DE DATOS =====
+    //BASE DE DATOS
     runtimeOnly 'org.postgresql:postgresql'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
-    // ===== JWT =====
+    //JWT
     implementation 'io.jsonwebtoken:jjwt-api:0.12.6'
     runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.6'
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.6'
 
-    // ===== UTILIDADES =====
+    //UTILIDADES
     implementation 'org.modelmapper:modelmapper:3.1.1'
 
-    // ===== TEST =====
+    //TEST
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     testRuntimeOnly 'com.h2database:h2'
+    testImplementation 'org.testcontainers:testcontainers:1.19.3'
+    testImplementation 'org.testcontainers:postgresql:1.19.3'
+
+    //REDIS PARA LOGOUT
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+    //RATE LIMITING (Bucket4j)
+    implementation 'com.bucket4j:bucket4j-core:8.10.1'
+
+    //SWAGGER / OPENAPI
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
+
+
 }
 
 tasks.named('test') {

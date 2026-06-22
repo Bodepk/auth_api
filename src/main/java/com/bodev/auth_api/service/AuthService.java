@@ -110,4 +110,13 @@ public class AuthService {
                 user.getFullName()
         );
     }
+    public String extractEmailFromToken(String token) {
+        return jwtService.extractEmail(token);
+    }
+
+    public long getTokenRemainingTime(String token) {
+        long expiration = jwtService.getExpirationTime(token);
+        long now = System.currentTimeMillis();
+        return Math.max(0, (expiration - now) / 1000);
+    }
 }
